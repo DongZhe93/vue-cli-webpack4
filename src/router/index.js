@@ -16,6 +16,14 @@ export default new Router({
         title: '首页'
       },
       component: () => import('../pages/index')
+    },
+    {
+      path: '/page1',
+      name: 'page1',
+      meta: {
+        title: 'page1'
+      },
+      component: () => import('../pages/page1')
     }
   ]
 })
