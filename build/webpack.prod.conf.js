@@ -9,7 +9,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin');
 
 const webpackConfig = merge(baseWebpackConfig, {
   mode: 'production',
@@ -35,13 +35,10 @@ const webpackConfig = merge(baseWebpackConfig, {
       name: 'manifest'
     },
     minimizer: [
-      new UglifyJsPlugin({
-        cache: true,
+      new TerserPlugin({
         parallel: true,
-        sourceMap: config.build.productionSourceMap, // set to true if you want JS source maps,
-        uglifyOptions: {
-          warnings: false
-        }
+        extractComments: false, // 不提取注释
+        sourceMap: config.build.productionSourceMap,
       }),
       new OptimizeCSSPlugin({
         cssProcessorOptions: config.build.productionSourceMap
@@ -66,7 +63,7 @@ const webpackConfig = merge(baseWebpackConfig, {
         },
         styles: {
           name: 'styles',
-          test: /\.(scss|css)$/,
+          test: /\.(less|css)$/,
           chunks: 'all',
           minChunks: 1,
           reuseExistingChunk: true,
@@ -77,8 +74,7 @@ const webpackConfig = merge(baseWebpackConfig, {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: utils.assetsPath('css/[name].[contenthash].css'),
-      // chunkFilename: 'css/[id].[contenthash:12].css'  // use contenthash *
+      filename: utils.assetsPath('css/[name].[contenthash].css')
     }),
     // generate dist index.html with correct asset hash for caching.
     // you can customize output by editing /index.html
@@ -102,13 +98,13 @@ const webpackConfig = merge(baseWebpackConfig, {
     new webpack.HashedModuleIdsPlugin(),
 
     // copy custom static assets
-    // new CopyWebpackPlugin([
-    //   {
-    //     from: path.resolve(__dirname, '../static'),
-    //     to: config.build.assetsSubDirectory,
-    //     ignore: ['.*']
-    //   }
-    // ])
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, '../src/static'),
+        to: config.build.assetsSubDirectory,
+        ignore: ['.*']
+      }
+    ])
   ]
 })
 

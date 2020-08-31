@@ -1,0 +1,30 @@
+html, body, div, h1, h2, h3, p {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
+}
+
+.flex-column() {
+  flex: 1;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+#app {
+  height: 100%;
+  .app {
+    height: 100%;
+    .flex-column();
+    .app-body{
+      .flex-column();
+    }
+  }
+}

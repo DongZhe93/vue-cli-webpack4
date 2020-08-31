@@ -29,6 +29,7 @@ exports.cssLoaders = function (options) {
       sourceMap: options.sourceMap
     }
   }
+
   // 添加px2remLoader
   const px2remLoader = {
     loader: 'px2rem-loader',
@@ -70,11 +71,7 @@ exports.cssLoaders = function (options) {
   return {
     css: generateLoaders(),
     postcss: generateLoaders(),
-    less: generateLoaders('less'),
-    sass: generateLoaders('sass', { indentedSyntax: true }),
-    scss: generateLoaders('sass'),
-    stylus: generateLoaders('stylus'),
-    styl: generateLoaders('stylus')
+    less: generateLoaders('less')
   }
 }
 
