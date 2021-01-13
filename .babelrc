@@ -14,8 +14,9 @@
   "plugins": [
     "transform-es2015-modules-commonjs",
     "transform-vue-jsx",
-    "transform-runtime",
-    ["component", [{ "libraryName": "mint-ui", "style": true }]]
+    "transform-runtime"
+    // ["component", [{ "libraryName": "mint-ui", "style": true }]]
+    // ["component", [{ "libraryName": "vant", "libraryDirectory": "es", "style": true }]]
   ],
   "env": {
     "development": {
